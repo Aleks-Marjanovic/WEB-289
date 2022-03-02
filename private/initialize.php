@@ -13,7 +13,7 @@
   require_once('database-connection.php');
   require_once('functions.php');
   require_once('validation_functions.php');
-  require_once('status_error_functions');
+  require_once('status_error_functions.php');
 
   require_once('classes/databaseobject.class.php');
   require_once('classes/state.class.php');

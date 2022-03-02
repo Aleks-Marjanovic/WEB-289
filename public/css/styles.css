@@ -1,0 +1,28 @@
+.banner-image{
+  background-image: url('../images/background.jpg');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: cover;
+  display: block;
+  height: 30rem;
+  position: relative;
+  width: 100%;
+}
+
+.banner-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.banner-text {
+  color: #eee;
+  padding: 50px 0;
+  position: relative;
+  text-align: center;
+  width: 100%;
+  z-index: 1;
+}
