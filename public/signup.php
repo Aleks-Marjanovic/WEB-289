@@ -3,22 +3,24 @@
 require_once('../private/initialize.php');
 
 if(is_post_request()) {
-
   $args = $_POST['admin'];
   $admin = new Admin($args);
   $result = $admin->save();
 
   if($result === true) {
     $new_id = $admin->id;
+    $session->login($admin);
     $session->message('The member was added successfully.');
     redirect_to(url_for('/member/index.php'));
   } else {
+
+    }
+  } else {
+    $admin = new Admin;
   }
+?>
 
-} else {
-  $admin = new Admin;
-}
-
+<?php
 $page_title = 'Sign Up';
 include(SHARED_PATH . '/public_header.php');
 ?>

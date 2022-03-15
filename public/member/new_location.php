@@ -24,7 +24,7 @@
 
 <?php echo display_errors($location->errors); ?>
 
-  <form action="<?php echo url_for('/member/new_location.php'); ?>" method="post">
+  <form action="<?php echo url_for('new_location.php'); ?>" method="post">
 
     <dl>
       <dt>Location Name</dt>
