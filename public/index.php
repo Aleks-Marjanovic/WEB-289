@@ -11,7 +11,7 @@
       </div>
     </section>
 
-    <button>Browse Locations</button>
+    <a href="locations.php"><button>Browse Locations</button></a>
 
     <section>
       <img src="images/overlook.jpg" alt="A photo of a person standing on the rock overlooking a valley" height="500" width="625">
@@ -20,7 +20,7 @@
       </div>
     </section>
 
-    <button>Become a Member</button>
+    <a href="signup.php"><button>Become a Member</button></a>
   </article>
 
 <?php include(SHARED_PATH . '/public_footer.php'); ?>

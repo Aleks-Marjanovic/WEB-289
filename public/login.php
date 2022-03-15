@@ -20,7 +20,7 @@ if(is_post_request()) {
     $admin = Admin::find_by_username($username);
     if($admin != false && $admin->verify_password($password)) {
       $session->login($admin);
-      redirect_to(url_for(''));
+      redirect_to(url_for('member/index.php'));
     } else {
       $errors[] = "Log in was unsuccessful.";
     }

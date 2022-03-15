@@ -19,11 +19,12 @@
         </div>
       <nav>
           <ul>
-            <li>Home</li>
-            <li>Locations</li>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="locations.php">Locations</a></li>
+            <li><a href="new_location.php">Add a Location</a></li>
             <?php if($session->is_logged_in()) { ?>
             <li>User: <?php echo $session->username; ?></li>
-            <li><a href="<?php echo url_for(''); ?>">Logout</a></li>
+            <li><a href="<?php echo url_for('../public/logout.php'); ?>">Logout</a></li>
             <?php } ?>
           </ul>
       </nav>

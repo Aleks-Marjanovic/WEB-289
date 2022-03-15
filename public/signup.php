@@ -11,7 +11,7 @@ if(is_post_request()) {
   if($result === true) {
     $new_id = $admin->id;
     $session->message('The member was added successfully.');
-    redirect_to(url_for('?id=' . $new_id));
+    redirect_to(url_for('/member/index.php'));
   } else {
   }
 
