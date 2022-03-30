@@ -10,7 +10,7 @@
   foreach($locations as $location) { ?>
     <div>
       <h2><?php echo h($location->location_name); ?></h2>
-      <img src="images/<?php echo $location->display_photo($location->id) ?>" height="500" width="500">
+      <img src="images/<?php echo $location->display_photo($location->id) ?>" height="500" width="500" alt="<?php echo $location->display_alt_text($location->id) ?>">
       <a href="<?php echo url_for('/single_location.php?id=' . h(u($location->id))); ?>">See More Info</a>
       <p>Short Description: <?php echo h($location->short_description); ?></p>
       <p>Photoshoot Type: <?php echo $location->display_photoshoot_type($location->photoshoot_id); ?></p>

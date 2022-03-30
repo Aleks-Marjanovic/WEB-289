@@ -9,7 +9,6 @@ class Photoshoot extends DatabaseObject {
   public $photoshoot_type;
 
   public function __construct($args=[]) {
-    $this->id = $args['id'] ?? '';
     $this->photoshoot_type = $args['photoshoot_type'] ?? '';
   }
 

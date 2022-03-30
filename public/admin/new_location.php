@@ -9,7 +9,7 @@
         if($result === true) {
           $new_id = $location->id;
           $session->message('The location was created successfully.');
-          redirect_to(url_for('/member/image_upload.php?id=' . $new_id));
+          redirect_to(url_for('/admin/image_upload.php?id=' . $new_id));
         } else {
 
         }
@@ -20,11 +20,11 @@
 
 
 <?php $page_title = 'New Location'; ?>
-<?php include(SHARED_PATH . '/member_header.php'); ?>
+<?php include(SHARED_PATH . '/admin_header.php'); ?>
 
 <?php echo display_errors($location->errors);?>
 
-  <form action="<?php echo url_for('/member/new_location.php'); ?>" method="post">
+  <form action="<?php echo url_for('/admin/new_location.php'); ?>" method="post">
 
     <dl>
       <dt>Location Name</dt>
@@ -83,4 +83,4 @@
     <input type="submit" value="Add Location">
   </form>
 
-<?php include(SHARED_PATH . '/member_footer.php'); ?>
+<?php include(SHARED_PATH . '/admin_footer.php'); ?>

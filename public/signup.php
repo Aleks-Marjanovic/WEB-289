@@ -32,22 +32,22 @@ include(SHARED_PATH . '/public_header.php');
   <form action="<?php echo url_for('signup.php'); ?>" method="post">
     <dl>
       <dt>Username</dt>
-      <dd><input type="text" name="admin[username]" value="<?php echo h($admin->username); ?>" /></dd>
+      <dd><input type="text" name="admin[username]" value="<?php echo h($admin->username); ?>" required/></dd>
     </dl>
 
     <dl>
       <dt>Email</dt>
-      <dd><input type="text" name="admin[email]" value="<?php echo h($admin->email); ?>" /></dd>
+      <dd><input type="text" name="admin[email]" value="<?php echo h($admin->email); ?>" required/></dd>
     </dl>
 
     <dl>
-      <dt>Password</dt>
-      <dd><input type="password" name="admin[password]" value="" /></dd>
+      <dt>Password (must contain at least 8 characters and a number)</dt>
+      <dd><input type="password" name="admin[password]" value="" required/></dd>
     </dl>
 
     <dl>
       <dt>Confirm Password</dt>
-      <dd><input type="password" name="admin[confirm_password]" value="" /></dd>
+      <dd><input type="password" name="admin[confirm_password]" value="" required/></dd>
     </dl>
     <input type="submit" value="Sign Up">
   </form>

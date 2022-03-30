@@ -8,14 +8,14 @@
 
 $id = $_GET['id'] ?? '1';
 if(!$id) {
-  redirect_to('member/index.php');
+  redirect_to('admin/index.php');
 }
 $location = Location::find_by_id($id);
 
 ?>
 
 <?php $page_title = $location->location_name; ?>
-<?php include(SHARED_PATH . '/member_header.php'); ?>
+<?php include(SHARED_PATH . '/admin_header.php'); ?>
 
 <section class="info">
   <img src="../images/<?php echo $location->display_photo($location->id) ?>" height="500" width="500">
@@ -67,7 +67,7 @@ $location = Location::find_by_id($id);
         if($result === true) {
           $new_id = $review->id;
           $session->message('The review was created successfully.');
-          redirect_to(url_for('/member/locations.php'));
+          redirect_to(url_for('/admin/locations.php'));
         } else {
 
         }
@@ -79,7 +79,7 @@ $location = Location::find_by_id($id);
 
 <?php echo display_errors($review->errors);?>
 
-<form action="<?php echo url_for('/member/single_location.php?id=' . h(u($location->id))); ?>" method="post">
+<form action="<?php echo url_for('/admin/single_location.php?id=' . h(u($location->id))); ?>" method="post">
 
     <dl>
       <dt>Your review:</dt>
@@ -124,4 +124,4 @@ $location = Location::find_by_id($id);
 </form>
 </section>
 
-<?php include(SHARED_PATH . '/member_footer.php'); ?>
+<?php include(SHARED_PATH . '/admin_footer.php'); ?>

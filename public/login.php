@@ -1,28 +1,33 @@
 <?php require_once('../private/initialize.php'); 
 
 $errors = [];
-$username = '';
+$email = '';
 $password = '';
 
 if(is_post_request()) {
 
-  $username = $_POST['username'] ?? '';
+  $email = $_POST['email'] ?? '';
   $password = $_POST['password'] ?? '';
 
-  if(is_blank($username)) {
-    $errors[] = "Username cannot be blank.";
+  if(is_blank($email)) {
+    $errors[] = "Email cannot be blank.";
   }
   if(is_blank($password)) {
     $errors[] = "Password cannot be blank.";
   }
 
   if(empty($errors)) {
-    $admin = Admin::find_by_username($username);
+    $admin = Admin::find_by_email($email);
     if($admin != false && $admin->verify_password($password)) {
       $session->login($admin);
-      redirect_to(url_for('member/index.php'));
+      if($admin->user_level_id > 2) {
+        redirect_to(url_for('member/index.php'));
+      } else {
+        redirect_to(url_for('admin/index.php'));
+      }
+ 
     } else {
-      $errors[] = "Log in was unsuccessful.";
+      $errors[] = "That combination of email and password does not exist. Try again.";
     }
 
   }
@@ -40,13 +45,13 @@ if(is_post_request()) {
   <?php echo display_errors($errors); ?>
 
   <form action="login.php" method="post">
-    <label for="username">Username:</label>
-    <input type="text" name="username" value="<?php echo h($username); ?>"><br>
+    <label for="email">Email:</label>
+    <input type="text" name="email" value="<?php echo h($email); ?>"><br>
 
     <label for="password">Password:</label>
     <input type="password" name="password" value=""><br>
 
-    <input type="submit" name="submit" value="Submit">
+    <input type="submit" name="submit" value="Log In">
   </form>
 </section>
 

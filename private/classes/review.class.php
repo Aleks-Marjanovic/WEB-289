@@ -12,7 +12,6 @@
     public $user_id;
 
     public function __construct($args=[]) {
-      $this->id = $args['id'] ?? '';
       $this->review_text = $args['review_text'] ?? '';
       $this->rating_id = $args['rating_id'] ?? '';
       $this->location_id = $args['location_id'] ?? '';

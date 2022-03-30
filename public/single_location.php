@@ -20,7 +20,7 @@ $location = Location::find_by_id($id);
   <div>
     <h2><?php echo h($location->location_name); ?></h2>
     <address><?php echo h($location->street_address); ?><br>
-             <?php echo h($location->city); ?>, <?php echo $location->display_state($location->state_id); ?> <br>
+             <?php echo h($location->city); ?>, NC<br>
              <?php echo h($location->zip_code); ?></address>
     <p>Phone Number: <?php echo h($location->phone_number); ?></p>
     <p>Detailed Description: <?php echo h($location->detailed_description); ?></p>
@@ -34,7 +34,7 @@ $location = Location::find_by_id($id);
 
    foreach($photos as $photo) {
     if($photo->location_id == $location->id) { ?>
-      <img src="images/<?php echo $photo->photo_name; ?>" height="250" width="250">
+      <img src="images/<?php echo $photo->photo_name; ?>" height="250" width="250" alt="<?php echo $photo->alt_text; ?>">
     <?php }
   }
 
@@ -42,6 +42,7 @@ $location = Location::find_by_id($id);
 </section>
 
 <section class="ratings">
+  <h3>Reviews</h3>
   <?php
 
   $reviews = Review::find_all();

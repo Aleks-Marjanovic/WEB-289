@@ -72,12 +72,21 @@ class DatabaseObject {
     $this->validate();
     if(!empty($this->errors)) { return false; }
 
+    function quote_null($a) {
+      if($a === '') {
+        return 'null';
+      } else {
+        return "'" . $a . "'";
+      }
+    }
+
     $attributes = $this->sanitized_attributes();
     $sql = "INSERT INTO " . static::$table_name . " (";
     $sql .= join(', ', array_keys($attributes));
-    $sql .= ") VALUES ('";
-    $sql .= join("', '", array_values($attributes));
-    $sql .= "')";
+    $sql .= ") VALUES (";
+    $prepared_attributes = array_map('quote_null', array_values($attributes));
+    $sql .= join(", ", $prepared_attributes);
+    $sql .= ")";
     $result = self::$database->query($sql);
     if($result) {
       $this->id = self::$database->insert_id;
@@ -164,6 +173,15 @@ class DatabaseObject {
     return $cover;
   }
 
+  public function display_alt_text($var) {
+    $sql = "SELECT alt_text FROM photo ";
+    $sql .= "LEFT JOIN location on location.id = photo.location_id ";
+    $sql .= "WHERE photo.location_id = " .$var;
+    $result = self::$database->query($sql);
+    $alt_text = $result->fetch_array()[0] ?? '';
+    return $alt_text;
+  }
+
   public function display_rating($var) {
     $sql = "SELECT rating FROM rating_lookup ";
     $sql .= "LEFT JOIN review on review.rating_id = rating_lookup.id ";
@@ -181,15 +199,16 @@ class DatabaseObject {
     $username = $result->fetch_array()[0] ?? '';
     return $username;
   }
-  
-  public function display_state($var) {
-    $sql = "SELECT state_abbreviation FROM state_lookup ";
-    $sql .= "LEFT JOIN location on location.state_id = state_lookup.id ";
-    $sql .= "WHERE state_lookup.id = " . $var;
+
+  public function display_user_level($var) {
+    $sql = "SELECT user_level FROM user_level_lookup ";
+    $sql .= "LEFT JOIN user on user.user_level_id = user_level_lookup.id ";
+    $sql .= "WHERE user.user_level_id = " . $var;
     $result = self::$database->query($sql);
-    $state = $result->fetch_array()[0] ?? '';
-    return $state;
+    $userlevel = $result->fetch_array()[0] ?? '';
+    return $userlevel;
   }
+  
 }
 
 ?>

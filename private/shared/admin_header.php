@@ -22,6 +22,7 @@
             <li><a href="index.php">Home</a></li>
             <li><a href="locations.php">Locations</a></li>
             <li><a href="new_location.php">Add a Location</a></li>
+            <li><a href="members_list.php">Member List</a></li>
             <?php if($session->is_logged_in()) { ?>
             <li><a href="<?php echo url_for('../public/logout.php'); ?>">Logout: <?php echo $session->username; ?></a></li>
             <?php } ?>
