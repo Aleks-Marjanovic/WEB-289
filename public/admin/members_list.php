@@ -18,6 +18,8 @@
       <th>Display Name:</th>
       <th>Email:</th>
       <th>User Level:</th>
+      <th>&nbsp;</th>
+      <th>&nbsp;</th>
     </tr>
 
 
@@ -27,6 +29,8 @@
       <td><?php echo $member->username; ?></td>
       <td><?php echo $member->email; ?></td>
       <td><?php echo $member->display_user_level($member->user_level_id)?></td>
+      <td><a href="<?php echo url_for('/admin/remove.php?id=' . h(u($member->id))); ?>">Remove</a></td>
+      <td><a href="<?php echo url_for('/admin/promote.php?id=' . h(u($member->id))); ?>">Promote</a></td>
     </tr>
   <?php }
 
