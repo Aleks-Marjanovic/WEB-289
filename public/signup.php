@@ -39,7 +39,7 @@ include(SHARED_PATH . '/public_header.php');
       <dt>Email</dt>
       <dd><input type="text" name="admin[email]" value="<?php echo h($admin->email); ?>" required/></dd>
     </dl>
-
+    
     <dl>
       <dt>Password (must contain at least 8 characters and a number)</dt>
       <dd><input type="password" name="admin[password]" value="" required/></dd>

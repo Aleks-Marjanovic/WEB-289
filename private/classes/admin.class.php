@@ -3,7 +3,7 @@
 class Admin extends DatabaseObject {
 
   static protected $table_name = "user";
-  static protected $db_columns = ['id', 'username', 'email', 'password', 'hashed_password'];
+  static protected $db_columns = ['id', 'username', 'email', 'password', 'user_level_id', 'hashed_password'];
 
   public $id;
   public $email;
@@ -19,7 +19,7 @@ class Admin extends DatabaseObject {
     $this->username = $args['username'] ?? '';
     $this->password = $args['password'] ?? '';
     $this->confirm_password = $args['confirm_password'] ?? '';
-    $this->user_level_id = $args['user_level_id'] ?? '';
+    $this->user_level_id = $args['user_level_id'] ?? '3';
   }
 
   protected function set_hashed_password() {

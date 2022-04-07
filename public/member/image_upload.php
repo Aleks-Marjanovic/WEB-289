@@ -2,7 +2,7 @@
       require_login();
 
       if(is_post_request()) {
-        $args = $_POST['upload'];
+        $args = $_POST['photo'];
         $photo = new Photo($args);
         $result = $photo->save();
 
@@ -57,7 +57,7 @@ $location = Location::find_by_id($id);
     </dl>
   </div>
 
-  <input type="submit" value="Upload Image" name="upload">
+  <input type="submit" value="Upload Image">
 
 </form>
 

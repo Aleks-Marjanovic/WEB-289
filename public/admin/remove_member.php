@@ -30,10 +30,10 @@
 <?php include(SHARED_PATH . '/admin_header.php'); ?>
 
 <h2>Remove Member</h2>
-<p>Are you sure you wish to delete this member?</p>
+<p>Are you sure you wish to remove this member?</p>
 <p><?php echo h($admin->username); ?></p>
 
-<form action="<?php echo url_for('/admin/remove.php?id=' . h(u($id))); ?>" method="post">
+<form action="<?php echo url_for('/admin/remove_member.php?id=' . h(u($id))); ?>" method="post">
   <input type="submit" name="commit" value="Remove Member">
 </form>
 

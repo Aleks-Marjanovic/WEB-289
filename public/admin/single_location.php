@@ -21,6 +21,9 @@ $location = Location::find_by_id($id);
   <img src="../images/<?php echo $location->display_photo($location->id) ?>" height="500" width="500">
   <div>
     <h2><?php echo h($location->location_name); ?></h2>
+
+    <a href="<?php echo url_for('/admin/remove_location.php?id=' . h(u($location->id))); ?>">Remove Location</a>
+
     <address><?php echo h($location->street_address); ?><br>
              <?php echo h($location->city); ?>, NC <br>
              <?php echo h($location->zip_code); ?></address>
@@ -51,6 +54,7 @@ $location = Location::find_by_id($id);
   foreach($reviews as $review) {
     if($review->location_id == $location->id) { ?>
       <p>User: <?php echo $review->display_user($review->user_id) ?></p>
+      <a href="<?php echo url_for('/admin/remove_review.php?id=' . h(u($review->id))); ?>">Remove Review</a>
       <p>Review: <?php echo h($review->review_text); ?></p>
       <p>Rating: <?php echo $review->display_rating($location->id); ?></p>
     <?php }
