@@ -23,6 +23,7 @@
   require_once('classes/photo.class.php');
   require_once('classes/review.class.php');
   require_once('classes/rating.class.php');
+  require_once('bulletproof.php');
 
   $database = db_connect();
   DatabaseObject::set_database($database);
