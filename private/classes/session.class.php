@@ -13,6 +13,12 @@ class Session {
     $this->check_stored_login();
   }
 
+  /**
+   * Creates a new session and logs in the admin
+   *
+   * @param [string] $admin
+   * @return boolean
+   */
   public function login($admin) {
     if($admin) {
       // prevent session fixation attacks
@@ -24,11 +30,21 @@ class Session {
     return true;
   }
 
+  /**
+   * Checks whether the user is logged in
+   *
+   * @return boolean
+   */
   public function is_logged_in() {
     // return isset($this->admin_id);
     return isset($this->admin_id) && $this->last_login_is_recent();
   }
 
+  /**
+   * Clears session data and logs out the user
+   *
+   * @return boolean
+   */
   public function logout() {
     unset($_SESSION['admin_id']);
     unset($_SESSION['username']);
@@ -39,6 +55,11 @@ class Session {
     return true;
   }
 
+  /**
+   * Checks whether the log in was saved
+   *
+   * @return void
+   */
   private function check_stored_login() {
     if(isset($_SESSION['admin_id'])) {
       $this->admin_id = $_SESSION['admin_id'];
@@ -47,6 +68,11 @@ class Session {
     }
   }
 
+  /**
+   * Checks if the log in was recent
+   *
+   * @return void
+   */
   private function last_login_is_recent() {
     if(!isset($this->last_login)) {
       return false;
@@ -57,6 +83,12 @@ class Session {
     }
   }
 
+  /**
+   * Sets of gets the session messages
+   *
+   * @param string $msg
+   * @return void
+   */
   public function message($msg="") {
     if(!empty($msg)) {
       // Then this is a "set" message
@@ -68,6 +100,11 @@ class Session {
     }
   }
 
+  /**
+   * Clears session messages
+   *
+   * @return void
+   */
   public function clear_message() {
     unset($_SESSION['message']);
   }

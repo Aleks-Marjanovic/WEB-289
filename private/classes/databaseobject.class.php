@@ -6,10 +6,22 @@ class DatabaseObject {
   static protected $columns = [];
   public $errors = [];
 
+  /**
+   * Sets the database in use
+   *
+   * @param [string] $database
+   * @return void
+   */
   static public function set_database($database) {
     self::$database = $database;
   }
 
+  /**
+   * Uses sql string to query the database
+   *
+   * @param [string] $sql
+   * @return array
+   */
   static public function find_by_sql($sql) {
     $result = self::$database->query($sql);
     if(!$result) {
@@ -27,11 +39,22 @@ class DatabaseObject {
     return $object_array;
   }
 
+  /**
+   * Finds all records in a certain table
+   *
+   * @return array
+   */
   static public function find_all() {
     $sql = "SELECT * FROM " . static::$table_name;
     return static::find_by_sql($sql);
   }
 
+  /**
+   * Creates new instances of a record with a property/value pair
+   *
+   * @param [object] $record
+   * @return void
+   */
   static protected function instantiate($record) {
     $object = new static;
     foreach($record as $property => $value) {
@@ -42,6 +65,11 @@ class DatabaseObject {
     return $object;
   }
 
+  /**
+   * Counts the number of records from certain table
+   *
+   * @return void
+   */
   static public function count_all() {
     $sql = "SELECT COUNT(*) FROM " . static::$table_name;
     $result_set = self::$database->query($sql);
@@ -49,6 +77,12 @@ class DatabaseObject {
     return array_shift($row);
   }
 
+  /**
+   * Finds records from certain table that match the provided ID
+   *
+   * @param [int] $id
+   * @return void
+   */
   static public function find_by_id($id) {
     $sql = "SELECT * FROM " . static::$table_name . " ";
     $sql .= "WHERE id='" . self::$database->escape_string($id) . "'";
@@ -60,6 +94,11 @@ class DatabaseObject {
     }
   }
 
+  /**
+   * Collects errors in an array
+   *
+   * @return array
+   */
   protected function validate() {
     $this->errors = [];
 
@@ -68,6 +107,11 @@ class DatabaseObject {
     return $this->errors;
   }
 
+  /**
+   * Creates new record and inserts it into appropriate table
+   *
+   * @return boolean
+   */
   protected function create() {
     $this->validate();
     if(!empty($this->errors)) { return false; }
@@ -94,6 +138,11 @@ class DatabaseObject {
     return $result;
   }
 
+  /**
+   * Updates the given record 
+   *
+   * @return boolean
+   */
   protected function update() {
     $this->validate();
     if(!empty($this->errors)) { return false; }
@@ -112,6 +161,11 @@ class DatabaseObject {
     return $result;
   }
 
+  /**
+   * Saves changes made by either calling the update or create method
+   *
+   * @return void
+   */
   public function save() {
     // A new record will not have an ID yet
     if(isset($this->id)) {
@@ -121,6 +175,12 @@ class DatabaseObject {
     }
   }
 
+  /**
+   * Merges property/value pairs
+   *
+   * @param array $args
+   * @return void
+   */
   public function merge_attributes($args=[]) {
     foreach($args as $key => $value) {
       if(property_exists($this, $key) && !is_null($value)) {
@@ -129,7 +189,11 @@ class DatabaseObject {
     }
   }
 
-  // Properties which have database columns, excluding ID
+  /**
+   * Properties which have database columns, excluding ID
+   *
+   * @return void
+   */
   public function attributes() {
     $attributes = [];
     foreach(static::$db_columns as $column) {
@@ -139,6 +203,11 @@ class DatabaseObject {
     return $attributes;
   }
 
+  /**
+   * Sanitizes attributes and returns the new version 
+   *
+   * @return array
+   */
   protected function sanitized_attributes() {
     $sanitized = [];
     foreach($this->attributes() as $key => $value) {
@@ -147,6 +216,11 @@ class DatabaseObject {
     return $sanitized;
   }
 
+  /**
+   * Deletes a record from a specific table
+   *
+   * @return void
+   */
   public function delete() {
     $sql = "DELETE FROM " . static::$table_name . " ";
     $sql .= "WHERE id='" . self::$database->escape_string($this->id) . "' ";
@@ -155,6 +229,12 @@ class DatabaseObject {
     return $result;
   }
 
+  /**
+   * Joins two tables to display string version of a photoshoot type
+   *
+   * @param [int] $var
+   * @return string $type
+   */
   public function display_photoshoot_type($var) {
     $sql = "SELECT photoshoot_type FROM photoshoot_lookup ";
     $sql .= "LEFT JOIN location on location.photoshoot_id = photoshoot_lookup.id ";
@@ -164,6 +244,12 @@ class DatabaseObject {
     return $type;
   }
 
+  /**
+   * Joins two tables to display photos that belong to a certain location
+   *
+   * @param [int] $var
+   * @return string $cover
+   */
   public function display_photo($var) {
     $sql = "SELECT photo_name FROM photo ";
     $sql .= "LEFT JOIN location on location.id = photo.location_id ";
@@ -173,6 +259,12 @@ class DatabaseObject {
     return $cover;
   }
 
+  /**
+   * Joins two tables to display the alt text of a photo
+   *
+   * @param [int] $var
+   * @return string $alt_text
+   */
   public function display_alt_text($var) {
     $sql = "SELECT alt_text FROM photo ";
     $sql .= "LEFT JOIN location on location.id = photo.location_id ";
@@ -182,6 +274,12 @@ class DatabaseObject {
     return $alt_text;
   }
 
+  /**
+   * Joins two tables to display the string version of the rating
+   *
+   * @param [int] $var
+   * @return string $rating
+   */
   public function display_rating($var) {
     $sql = "SELECT rating FROM rating_lookup ";
     $sql .= "LEFT JOIN review on review.rating_id = rating_lookup.id ";
@@ -191,6 +289,12 @@ class DatabaseObject {
     return $rating;
   }
 
+  /**
+   * Joins two tables to display a string version of a reviewer
+   *
+   * @param [int] $var
+   * @return string $username
+   */
   public function display_user($var) {
     $sql = "SELECT username FROM user ";
     $sql .= "LEFT JOIN review on review.user_id = user.id ";
@@ -200,6 +304,12 @@ class DatabaseObject {
     return $username;
   }
 
+  /**
+   * Joins two tables to display the string version of users level
+   *
+   * @param [int] $var
+   * @return string $userlevel
+   */
   public function display_user_level($var) {
     $sql = "SELECT user_level FROM user_level_lookup ";
     $sql .= "LEFT JOIN user on user.user_level_id = user_level_lookup.id ";

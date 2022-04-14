@@ -22,19 +22,40 @@ class Admin extends DatabaseObject {
     $this->user_level_id = $args['user_level_id'] ?? '3';
   }
 
+  /**
+   * Takes plaintext password and hashes it
+   *
+   * @return $hashed_password
+   */
   protected function set_hashed_password() {
     $this->hashed_password = password_hash($this->password, PASSWORD_BCRYPT);
   }
 
+  /**
+   * Compares password with hashed version
+   *
+   * @param [string] $password
+   * @return boolean
+   */
   public function verify_password($password) {
     return password_verify($password, $this->hashed_password);
   }
 
+  /**
+   * Calls set_hashed_password method on current instance
+   *
+   * @return void
+   */
   protected function create() {
     $this->set_hashed_password();
     return parent::create();
   }
 
+  /**
+   * Change the value of the password
+   *
+   * @return void
+   */
   protected function update() {
     if($this->password != '') {
       $this->set_hashed_password();
@@ -46,6 +67,11 @@ class Admin extends DatabaseObject {
     return parent::update();
   }
 
+  /**
+   * Validates user input and collects errors if there are any
+   *
+   * @return array of $errors
+   */
   protected function validate() {
     $this->errors = [];
 
@@ -84,6 +110,12 @@ class Admin extends DatabaseObject {
     return $this->errors;
   }
 
+  /**
+   * Finds users based on username
+   *
+   * @param [string] $username
+   * @return void
+   */
   static public function find_by_username($username) {
     $sql = "SELECT * FROM " . static::$table_name . " ";
     $sql .= "WHERE username='" . self::$database->escape_string($username) . "'";
@@ -95,6 +127,12 @@ class Admin extends DatabaseObject {
     }
   }
 
+  /**
+   * Finds users based on email
+   *
+   * @param [string] $email
+   * @return void
+   */
   static public function find_by_email($email) {
     $sql = "SELECT * FROM " . static::$table_name . " ";
     $sql .= "WHERE email='" . self::$database->escape_string($email) . "'";
