@@ -17,17 +17,6 @@
         $photo = new Photo;
       }
 
-      $image = new Bulletproof\Image($_FILES);
-
-        if($image["pictures"]){
-          $upload = $image->upload(); 
-
-          if($upload){
-            echo $upload->getFullPath(); // uploads/cat.gif
-          }else{
-            echo $image->getError(); 
-          }
-        }
       
 ?>
 
@@ -47,7 +36,7 @@ $location = Location::find_by_id($id);
 <form action="image_upload.php?id=<?php echo $location->id?>" method="post" enctype="multipart/form-data">
   <dl>
     <dt>Select image to upload:</dt>
-    <dd><input type="file" name="photo[photo_name]" value="<?php echo $location->location_name?>"></dd>
+    <dd><input type="file" name="photo[photo_name]" value="<?php echo h($photo->photo_name) ?>"></dd>
   </dl>
 
   <dl>

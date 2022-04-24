@@ -253,7 +253,7 @@ class DatabaseObject {
   public function display_photo($var) {
     $sql = "SELECT photo_name FROM photo ";
     $sql .= "LEFT JOIN location on location.id = photo.location_id ";
-    $sql .= "WHERE photo.location_id = " .$var;
+    $sql .= "WHERE photo.location_id = " . $var;
     $result = self::$database->query($sql);
     $cover = $result->fetch_array()[0] ?? '';
     return $cover;

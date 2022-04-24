@@ -7,12 +7,13 @@
       }
       $id = $_GET['id'];
       $admin = Admin::find_by_id($id);
+      $admin->promote($id);
       if($admin == false) {
         redirect_to(url_for('/admin/index.php'));
       }
       
       if(is_post_request()) {
-        $admin->user_level_id = 2;
+
         $session->message('The member was promoted successfully.');
         redirect_to(url_for('/admin/members_list.php'));      
       } else {

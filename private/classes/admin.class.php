@@ -144,6 +144,13 @@ class Admin extends DatabaseObject {
     }
   }
 
+  static public function promote($id) {
+    $sql = "UPDATE user ";
+    $sql .= "SET `user_level_id`='2' ";
+    $sql .= "WHERE `id`='" . $id . "'";
+    $result = self::$database->query($sql);
+  }
+
 }
 
 ?>
