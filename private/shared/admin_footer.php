@@ -1,3 +1,5 @@
+
+    </div>
     
     <footer>
       <p>Copyright &copy; <?php echo date('Y'); ?>, Aleks Marjanovic</p>

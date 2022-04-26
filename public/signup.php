@@ -26,7 +26,6 @@ include(SHARED_PATH . '/public_header.php');
 ?>
 
 <section>
-  <h1>Sign Up</h1>
   <?php echo display_errors($admin->errors); ?>
 
   <form action="<?php echo url_for('signup.php'); ?>" method="post">

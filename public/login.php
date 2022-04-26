@@ -41,7 +41,6 @@ if(is_post_request()) {
 <?php include(SHARED_PATH . '/public_header.php'); ?>
 
 <section>
-  <h1>Log In</h1>
   <?php echo display_errors($errors); ?>
 
   <form action="login.php" method="post">
