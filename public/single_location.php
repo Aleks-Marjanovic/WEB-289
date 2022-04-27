@@ -16,7 +16,7 @@ $location = Location::find_by_id($id);
 <article class="location-content">
 
   <section class="location-info">
-    <img src="images/<?php echo $location->display_photo($location->id) ?>" height="500" width="500">
+    <img src="images/<?php echo $location->display_photo($location->id) ?>" height="500" width="500" alt="<?php echo $location->display_alt_text($location->id) ?>">
     <h2><?php echo h($location->location_name); ?></h2>
     <address><?php echo h($location->street_address); ?><br>
             <?php echo h($location->city); ?>, NC<br>
@@ -25,6 +25,7 @@ $location = Location::find_by_id($id);
     <p>Detailed Description: <?php echo h($location->detailed_description); ?></p>
   </section>
 
+  <h3>Gallery</h3>
   <section class="gallery">
     <?php
 
@@ -32,7 +33,7 @@ $location = Location::find_by_id($id);
 
     foreach($photos as $photo) {
       if($photo->location_id == $location->id) { ?>
-        <img src="images/<?php echo $photo->photo_name; ?>" height="250" width="250" alt="<?php echo $photo->alt_text; ?>">
+        <img src="images/<?php echo $photo->photo_name; ?>" alt="<?php echo $photo->alt_text; ?>">
       <?php }
     }
 
@@ -40,15 +41,17 @@ $location = Location::find_by_id($id);
   </section>
 
   <h3>Reviews</h3>
-  <section class="location-info">
+  <section class="review-info">
     <?php
 
     $reviews = Review::find_all();
     foreach($reviews as $review) {
       if($review->location_id == $location->id) { ?>
+      <div class="review">
         <p>User: <?php echo $review->display_user($review->user_id) ?></p>
-        <p>Review: <?php echo h($review->review_text); ?></p>
+        <p>Review: <br><?php echo h($review->review_text); ?></p>
         <p>Rating: <?php echo $review->display_rating($location->id); ?></p>
+      </div>
       <?php }
     }
 

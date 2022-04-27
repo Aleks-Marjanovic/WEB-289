@@ -23,64 +23,58 @@
 <?php include(SHARED_PATH . '/member_header.php'); ?>
 
 <?php echo display_errors($location->errors);?>
+<section>
+  <div class="login-form">
+    <h2 class="login-sign">Add a New Location</h2>
+    <form action="<?php echo url_for('/member/new_location.php'); ?>" method="post">
 
-  <form action="<?php echo url_for('/member/new_location.php'); ?>" method="post">
+      <label for="location-name">Location name:<br>
+        <input type="text" id="location-name" name="location[location_name]" value="<?php echo h($location->location_name); ?>" required class="input-field"/><br>
+      </label>
 
-    <dl>
-      <dt>Location Name</dt>
-      <dd><input type="text" name="location[location_name]" value="<?php echo h($location->location_name); ?>" required/></dd>
-    </dl>
+      <label for="location-address">Location Street Address:<br>
+        <input type="text" id="location-address" name="location[street_address]" value="<?php echo h($location->street_address); ?>" required class="input-field"/><br>
+      </label>
 
-    <dl>
-      <dt>Street Address</dt>
-      <dd><input type="text" name="location[street_address]" value="<?php echo h($location->street_address); ?>" required/></dd>
-    </dl>
+      <label for="location-city">Location City:<br>
+        <input type="text" id="location-city" name="location[city]" value="<?php echo h($location->city); ?>" required class="input-field"/><br>
+      </label>
 
-    <dl>
-      <dt>City</dt>
-      <dd><input type="text" name="location[city]" value="<?php echo h($location->city); ?>" required/></dd>
-    </dl>
+      <label for="location-zip">Location Zip Code:<br>
+        <input type="text" id="location-zip" name="location[zip_code]" value="<?php echo h($location->zip_code); ?>" required class="input-field"/><br>
+      </label>
 
-    <dl>
-      <dt>Zip Code</dt>
-      <dd><input type="text" name="location[zip_code]" value="<?php echo h($location->zip_code); ?>" required/></dd>
-    </dl>
+      <label for="location-phone">Location Phone Number:<br>
+        <input type="text" id="location-phone" name="location[phone_number]" value="<?php echo h($location->phone_number); ?>" class="input-field"/><br>
+      </label>
 
-    <dl>
-      <dt>Phone Number</dt>
-      <dd><input type="text" name="location[phone_number]" value="<?php echo h($location->phone_number); ?>" /></dd>
-    </dl>
+      <label for="location-short">Short Description (up to 50 words): <br>
+        <textarea type="text" id="location-short" name="location[short_description]" rows="5" cols="30" required> <?php echo h($location->short_description); ?></textarea><br>
+      </label>
 
-    <dl>
-      <dt>Short Description (up to 50 words)</dt>
-      <dd><textarea type="text" name="location[short_description]" rows="5" cols="30" required> <?php echo h($location->short_description); ?></textarea></dd>
-    </dl>
+      <label for="location-long">Detailed Description:<br>
+        <textarea type="text" id="location-long" name="location[detailed_description]" rows="10" cols="30" required><?php echo h($location->detailed_description); ?></textarea><br>
+      </label>
 
-    <dl>
-      <dt>Detailed Description</dt>
-      <dd><textarea type="text" name="location[detailed_description]" rows="10" cols="30" required><?php echo h($location->detailed_description); ?></textarea></dd>
-    </dl>
-
-    <dl>
-      <dt>Photoshoot Type</dt>
-      <dd>
-        <select name="location[photoshoot_id]">
+      <label for="location-type">Photoshoot type:<br>
+        <select name="location[photoshoot_id]" id="location-type">
           <option value=""></option>
           <?php 
 
             $photoshoots = Photoshoot::find_all();
             foreach($photoshoots as $photoshoot) { ?>
               <option value="<?php echo $photoshoot->id; ?>"
-                             <?php if($location->photoshoot_id == $photoshoot->id) {echo 'selected';} ?>>
+                            <?php if($location->photoshoot_id == $photoshoot->id) {echo 'selected';} ?>>
               <?php echo $photoshoot->photoshoot_type; ?>
               </option>
             <?php }
           ?>
-        </select>
-      </dd>
-    </dl>
-      
-    <input type="submit" value="Add Location">
-  </form>
+        </select><br>
+      </label>
+        
+      <input type="submit" value="Add Location" class="button">
+    </form>
+  </div>
+</section>
 
 <?php include(SHARED_PATH . '/member_footer.php'); ?>

@@ -40,18 +40,22 @@ if(is_post_request()) {
 <?php $page_title = 'Login'; ?>
 <?php include(SHARED_PATH . '/public_header.php'); ?>
 
+<?php echo display_errors($errors); ?>
 <section>
-  <?php echo display_errors($errors); ?>
-
-  <form action="login.php" method="post">
-    <label for="email">Email:</label>
-    <input type="text" name="email" value="<?php echo h($email); ?>"><br>
-
-    <label for="password">Password:</label>
-    <input type="password" name="password" value=""><br>
-
-    <input type="submit" name="submit" value="Log In">
-  </form>
+  <div class="login-form">
+    <h2 class="login-sign">Log In</h2>
+    <form action="login.php" method="post">
+      
+    <label for="email">Email:<br>
+        <input type="text" id="email" name="email" value="<?php echo h($email); ?>" class="input-field"><br>
+      </label>
+      
+      <label for="password">Password:<br>
+        <input type="password" id="password" name="password" value="" class="input-field"><br>
+      </label>
+      <input type="submit" name="submit" value="Log In" class="button">
+    </form>
+  </div>
 </section>
 
 <?php include(SHARED_PATH . '/public_footer.php'); ?>

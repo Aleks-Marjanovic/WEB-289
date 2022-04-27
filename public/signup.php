@@ -25,31 +25,30 @@ $page_title = 'Sign Up';
 include(SHARED_PATH . '/public_header.php');
 ?>
 
+<?php echo display_errors($admin->errors); ?>
 <section>
-  <?php echo display_errors($admin->errors); ?>
+  <div class="login-form">
+    <h2 class="login-sign">Sign Up</h2>
+    <form action="<?php echo url_for('signup.php'); ?>" method="post">
 
-  <form action="<?php echo url_for('signup.php'); ?>" method="post">
-    <dl>
-      <dt>Username</dt>
-      <dd><input type="text" name="admin[username]" value="<?php echo h($admin->username); ?>" required/></dd>
-    </dl>
+      <label for="username">Username:<br>
+        <input type="text" id="username" name="admin[username]" value="<?php echo h($admin->username); ?>" required class="input-field"/><br>
+      </label>
+      
+      <label for="email">Email:<br>
+        <input type="text" id="email" name="admin[email]" value="<?php echo h($admin->email); ?>" required class="input-field"/><br>
+      </label>
 
-    <dl>
-      <dt>Email</dt>
-      <dd><input type="text" name="admin[email]" value="<?php echo h($admin->email); ?>" required/></dd>
-    </dl>
-    
-    <dl>
-      <dt>Password (must contain at least 8 characters and a number)</dt>
-      <dd><input type="password" name="admin[password]" value="" required/></dd>
-    </dl>
+      <label for="password">Password (must contain at least 8 characters and a number):<br>
+        <input type="password" id="password" name="admin[password]" value="" required class="input-field" placeholder=""/><br>
+      </label>
 
-    <dl>
-      <dt>Confirm Password</dt>
-      <dd><input type="password" name="admin[confirm_password]" value="" required/></dd>
-    </dl>
-    <input type="submit" value="Sign Up">
-  </form>
+      <label for="confirm-password">Confirm Password:<br>
+        <input type="password" id="confirm-password" name="admin[confirm_password]" value="" required class="input-field"/><br>
+      </label>
+
+      <input type="submit" value="Sign Up" class="button">
+    </form>
 </section>
 
 <?php include(SHARED_PATH . '/public_footer.php'); ?>

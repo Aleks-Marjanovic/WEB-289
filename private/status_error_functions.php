@@ -23,13 +23,11 @@ function require_login() {
 function display_errors($errors=array()) {
   $output = '';
   if(!empty($errors)) {
-    $output .= "<div class=\"errors\">";
+    $output .= "<div class=\"errors-container\">";
     $output .= "Please fix the following errors:";
-    $output .= "<ul>";
     foreach($errors as $error) {
-      $output .= "<li>" . h($error) . "</li>";
+      $output .= "<p class=\"errors\">" . h($error) . "</p>";
     }
-    $output .= "</ul>";
     $output .= "</div>";
   }
   return $output;
