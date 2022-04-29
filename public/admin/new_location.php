@@ -27,7 +27,7 @@
 <section>
   <div class="login-form">
     <h2 class="login-sign">Add a New Location</h2>
-    <form action="<?php echo url_for('/member/new_location.php'); ?>" method="post">
+    <form action="<?php echo url_for('/admin/new_location.php'); ?>" method="post">
 
       <label for="location-name">Location name:<br>
         <input type="text" id="location-name" name="location[location_name]" value="<?php echo h($location->location_name); ?>" required class="input-field"/><br>

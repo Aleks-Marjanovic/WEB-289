@@ -2,14 +2,14 @@
       require_login();
 
       if(is_post_request()) {
-        $args = $_POST['photo'];
+        $args = $_POST['upload'];
         $photo = new Photo($args);
         $result = $photo->save();
 
         if($result === true) {
           $new_id = $photo->id;
           $session->message('The photo was added successfully.');
-          redirect_to(url_for('/member/locations.php'));
+          redirect_to(url_for('/member/image_upload.php?id=' . $id));
         } else {
 
         }
@@ -33,33 +33,37 @@ $location = Location::find_by_id($id);
 <?php $page_title = $location->location_name . " - Image Upload"; ?>
 <?php include(SHARED_PATH . '/member_header.php'); ?>
 
-<form action="image_upload.php?id=<?php echo $location->id?>" method="post" enctype="multipart/form-data">
-  <dl>
-    <dt>Select image to upload:</dt>
-    <dd><input type="file" name="photo[photo_name]" value="<?php echo h($photo->photo_name) ?>"></dd>
-  </dl>
+<section>
+  <div class="login-form">
+    <h2 class="login-sign">Upload Images</h2>
+    <form action="image_upload.php?id=<?php echo $location->id?>" method="post" enctype="multipart/form-data">
 
-  <dl>
-    <dt>Short Description (one sentence)</dt>
-    <dd><textarea type="text" name="photo[alt_text]" rows="5" cols="30" required> <?php echo h($photo->alt_text); ?></textarea></dd>
-  </dl>
+      <label for="upload-name">Select the image to upload:<br>
+        <input type="file" id="upload-name" name="photo[photo_name]" value="<?php echo h($photo->photo_name) ?>"><br>
+      </label><br>
 
-  <div class="hide">
-    <dl>
-      <dd><input type="text" name="photo[user_id]" value="<?php echo h($session->admin_id); ?>" /></dd>
-    </dl>
+      <label for="upload-short">Short Description:<br>
+        (One Sentence)<br>
+        <textarea type="text" id="upload-short" name="photo[alt_text]" rows="5" cols="30" required> <?php echo h($photo->alt_text); ?></textarea><br>
+      </label>
 
-    <dl>
-      <dd>
-        <select name="photo[location_id]">
-          <option value="<?php echo $location->id; ?>" selected></option>
-        </select>
-      </dd>
-    </dl>
+      <div class="hide">
+        <label for="upload-user">User ID:<br>
+          <input type="text" id="upload-user" name="photo[user_id]" value="<?php echo h($session->admin_id); ?>" />
+        </label>
+
+        <label for="upload-location">Location ID:<br>
+          <select name="photo[location_id]">
+            <option value="<?php echo $location->id; ?>" selected></option>
+          </select>
+        </label>
+      </div>
+
+      <input type="submit" value="Upload Image" name="upload" class="button">
+      <a href="<?php echo url_for('/member/locations.php'); ?>" class="button">Skip</a>
+
+    </form>
   </div>
-
-  <input type="submit" value="Upload Image">
-
-</form>
+</section>
 
 <?php include(SHARED_PATH . '/member_footer.php'); ?>

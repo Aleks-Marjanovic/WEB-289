@@ -43,7 +43,13 @@ function display_session_message() {
   $msg = $session->message();
   if(isset($msg) && $msg != '') {
     $session->clear_message();
-    return '<div id="message">' . h($msg) . '</div>';
+    $output = "<div class=\"modal\">";
+    $output .= "<div class=\"modal-content\">";
+    $output .= "<span class=\"remove-button\">OK</span>";
+    $output .= "<p id=\"message\">" . h($msg) . "</p>";
+    $output .= "</div>";
+    $output .= "</div>";
+    return $output;
   }
 }
 

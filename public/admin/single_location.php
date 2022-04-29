@@ -23,16 +23,16 @@ $location = Location::find_by_id($id);
     <img src="../images/<?php echo $location->display_photo($location->id) ?>" height="500" width="500" alt="<?php echo $location->display_alt_text($location->id) ?>">
       <h2><?php echo h($location->location_name); ?></h2>
 
-      
       <address><?php echo h($location->street_address); ?><br>
       <?php echo h($location->city); ?>, NC <br>
       <?php echo h($location->zip_code); ?></address>
       <p>Phone Number: <?php echo h($location->phone_number); ?></p>
       <p>Detailed Description: <br> <?php echo h($location->detailed_description); ?></p>
-      <a href="<?php echo url_for('/admin/remove_location.php?id=' . h(u($location->id))); ?>" class="button">Remove Location</a>
+      <a href="<?php echo url_for('/admin/remove_location.php?id=' . h(u($location->id))); ?>" class="remove-button">Remove Location</a>
   </section>
 
   <h3>Gallery</h3>
+  <a href="<?php echo url_for('/admin/image_upload.php?id=' . $id); ?>" class="button">Add Images to Gallery</a>
   <section class="gallery">
     <?php
 
@@ -58,7 +58,7 @@ $location = Location::find_by_id($id);
           <p>User: <?php echo $review->display_user($review->user_id) ?></p>
           <p>Review:<br> <?php echo h($review->review_text); ?></p>
           <p>Rating: <?php echo $review->display_rating($location->id); ?></p>
-          <a href="<?php echo url_for('/admin/remove_review.php?id=' . h(u($review->id))); ?>" class="button">Remove Review</a>
+          <a href="<?php echo url_for('/admin/remove_review.php?id=' . h(u($review->id))); ?>" class="remove-button">Remove Review</a>
         </div>
       <?php }
     }
@@ -75,7 +75,7 @@ $location = Location::find_by_id($id);
         if($result === true) {
           $new_id = $review->id;
           $session->message('The review was created successfully.');
-          redirect_to(url_for('/admin/locations.php'));
+          redirect_to(url_for('admin/single_location.php?id=' . h(u($location->id))));
         } else {
   
         }

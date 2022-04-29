@@ -1,12 +1,16 @@
 /*** Global ***/
+@import url('https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;700&display=swap');
+
 * {
   box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
 }
 
 body {
   background-color: #F3EBF6;
-  /* font-family: ; */
-  font-size: calc(10px + (14 - 10) * ((100vw -
+  font-family: Alegreya, "Times New Roman", serif;
+  font-size: calc(10px + (16 - 10) * ((100vw -
     375px) / (1600 - 375)));
   margin: 0;
   min-height: 100vh;
@@ -41,6 +45,14 @@ img {
   border-radius: 1.5em;
 }
 
+.hide {
+  display: none;
+}
+
+#message {
+  color: var(--main-color);
+}
+
 /*** Variables ***/
 
 :root {
@@ -48,6 +60,8 @@ img {
   --accent-color: #F16B2E;
   --secondary-color: #011E30;
   --tertiary-color: #168CD1;
+  --remove-color-main: #a82929;
+  --remove-color-accent: #a56161;
 }
 
 
@@ -84,7 +98,8 @@ img {
 
 /*** Nav ***/
 
-nav {
+nav,
+footer {
   padding-top: .5em;
 	padding-bottom: .5em;
 	border: 1px solid var(--tertiary-color);
@@ -131,13 +146,18 @@ nav li:last-of-type {
   border-radius: 10px;
 }
 
+footer {
+  text-align: center;
+  color: var(--accent-color);
+}
+
 /*** Index and Locations ***/
 
 .wrapper article {
   margin: 50px 0;
   margin-left: auto;
   margin-right: auto;
-  width: 1000px;
+  width: 80%;
 }
 
 .wrapper .content {
@@ -295,7 +315,7 @@ h3 {
   color: var(--tertiary-color);
 }
 
-/*** Login Form ***/
+/*** Forms ***/
 
 .login-form {
   background-color: #FFFFFF;
@@ -341,7 +361,8 @@ h3 {
   border: 2px solid rgba(22, 140, 209,.7) !important;
 }
 
-.button {
+.button,
+.remove-button {
   cursor: pointer;
   border-radius: 5em;
   color: #fff;
@@ -359,9 +380,12 @@ h3 {
   margin-top: 2rem;
 }
 
+.remove-button {
+  background: linear-gradient(to right, var(--remove-color-main), var(--remove-color-accent));
+}
+
 label {
   color: var(--tertiary-color);
-  font-size: 1.5rem;
 }
 
 /*** Review ***/
@@ -420,6 +444,9 @@ label {
   -moz-column-gap: 0px;
   column-count: 2;
   column-gap: 0px;
+  padding-top: 3rem;
+  width: 70%;
+  margin: 0 auto;
 }
 
 .gallery img {
@@ -428,14 +455,108 @@ label {
   border: 1px solid var(--tertiary-color);
 }
 
-.hide {
-  display: none;
+h3 + .button {
+  display: flex;
+  justify-content: center;
+}
+
+/*** Table ***/
+
+.table-wrapper{
+  margin: 10px 70px 70px;
+  box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+  padding-top: 2rem;
+}
+
+.table-wrapper table {
+    border-radius: 5px;
+    font-weight: normal;
+    border: none;
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 100%;
+    white-space: nowrap;
+    background-color: white;
+}
+
+.table-wrapper table td,
+.table-wrapper table th {
+    text-align: center;
+    padding: 8px;
+}
+
+.table-wrapper table td {
+    border-right: 1px solid #f8f8f8;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.table-wrapper table thead th {
+    color: #ffffff;
+    background: var(--tertiary-color);
 }
 
 
+.table-wrapper table thead th:nth-child(odd) {
+    color: #ffffff;
+    background: var(--secondary-color);
+}
+
+.table-wrapper table tr:nth-child(even) {
+    background: #F8F8F8;
+}
+
+/*** Modal ***/
+
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 1;
+  transform: scale(1.1);
+  transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+  z-index: 1;
+}
+
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 1rem 1.5rem;
+  width: 24rem;
+  border-radius: 0.5rem;
+}
+
+.modal .remove-button {
+  float: right;
+  width: 1.5rem;
+  line-height: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 0.25rem;
+}
+
+.show-modal {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.0);
+  transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+} 
+
 /*** Media Queries ***/
 
+@media only screen and (max-width: 1133px) {
+ 
+}
+
 @media only screen and (min-width: 769px) {
+
+  /*** Nav ***/
   nav,
   nav ul {
     display: flex;
@@ -445,13 +566,21 @@ label {
     flex-direction: column;
     align-items: center;
   }
+
+  /*** Table ***/
+
 }
 
 @media only screen and (min-width: 1025px) {
+
+  /*** Nav ***/
+
   nav {
     flex-direction: row;
     justify-content: space-between;
   }  
+
+  /*** ***/
 }
 
 /* @media only screen and () {
