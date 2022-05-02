@@ -33,7 +33,7 @@ $location = Location::find_by_id($id);
 
     foreach($photos as $photo) {
       if($photo->location_id == $location->id) { ?>
-        <img src="images/<?php echo $photo->photo_name; ?>" alt="<?php echo $photo->alt_text; ?>">
+        <img src="images/<?php echo $photo->photo_name; ?>" height="300" width="400" alt="<?php echo $photo->alt_text; ?>">
       <?php }
     }
 

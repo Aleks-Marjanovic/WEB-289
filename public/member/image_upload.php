@@ -53,7 +53,7 @@ $location = Location::find_by_id($id);
         </label>
 
         <label for="upload-location">Location ID:<br>
-          <select name="photo[location_id]">
+          <select name="photo[location_id]" id="upload-location">
             <option value="<?php echo $location->id; ?>" selected></option>
           </select>
         </label>

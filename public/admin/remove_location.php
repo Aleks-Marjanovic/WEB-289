@@ -33,6 +33,7 @@
 
     <form action="<?php echo url_for('/admin/remove_location.php?id=' . h(u($id))); ?>" method="post">
       <input type="submit" name="commit" value="Remove Location" class="remove-button">
+      <a href="<?php echo url_for('/admin/locations.php'); ?>" class="button">Cancel</a>
     </form>
   </div>
 </section>

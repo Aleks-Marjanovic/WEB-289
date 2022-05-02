@@ -20,7 +20,7 @@ $location = Location::find_by_id($id);
 <article class="location-content">
 
   <section class="location-info">
-    <img src="../images/<?php echo $location->display_photo($location->id) ?>" height="500" width="500" alt="<?php echo $location->display_alt_text($location->id) ?>">
+    <img src="../images/<?php echo $location->display_photo($location->id) ?>" height="300" width="400" alt="<?php echo $location->display_alt_text($location->id) ?>">
       <h2><?php echo h($location->location_name); ?></h2>
 
       <address><?php echo h($location->street_address); ?><br>
@@ -40,7 +40,7 @@ $location = Location::find_by_id($id);
 
     foreach($photos as $photo) {
       if($photo->location_id == $location->id) { ?>
-        <img src="../images/<?php echo $photo->photo_name; ?>" height="250" width="250" alt="<?php echo $photo->alt_text; ?>">
+        <img src="../images/<?php echo $photo->photo_name; ?>" height="300" width="400" alt="<?php echo $photo->alt_text; ?>">
       <?php }
     }
 

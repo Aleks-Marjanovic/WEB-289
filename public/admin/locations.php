@@ -19,7 +19,7 @@
     <section class="content">
       <a href="<?php echo url_for('admin/single_location.php?id=' . h(u($location->id))); ?>">
       <div class="card">
-        <img src="../images/<?php echo $location->display_photo($location->id) ?>" height="500" width="500" alt="<?php echo $location->display_alt_text($location->id) ?>">
+        <img src="../images/<?php echo $location->display_photo($location->id) ?>" height="300" width="400" alt="<?php echo $location->display_alt_text($location->id) ?>">
         <div class="text-box">
           <h2><?php echo h($location->location_name); ?></h2>
           <p>Short Description: <br><?php echo h($location->short_description); ?></p>
