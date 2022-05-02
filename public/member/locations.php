@@ -19,11 +19,11 @@
     <section class="content">
       <a href="<?php echo url_for('member/single_location.php?id=' . h(u($location->id))); ?>">
       <div class="card">
-        <img src="../images/<?php echo $location->display_photo($location->id) ?>" height="300" width="400" alt="<?php echo $location->display_alt_text($location->id) ?>">
+        <img src="<?php echo url_for('images/' . h(u($location->display_photo($location->id)))); ?>" height="300" width="400" alt="<?php echo h($location->display_alt_text($location->id)); ?>">
         <div class="text-box">
           <h2><?php echo h($location->location_name); ?></h2>
           <p>Short Description: <br><?php echo h($location->short_description); ?></p>
-          <p>Photoshoot Type: <br><?php echo $location->display_photoshoot_type($location->photoshoot_id); ?></p>
+          <p>Photoshoot Type: <br><?php echo h($location->display_photoshoot_type($location->photoshoot_id)); ?></p>
         </div>
       </div>
       </a>

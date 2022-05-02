@@ -23,7 +23,7 @@
 
 $id = $_GET['id'] ?? '1';
 if(!$id) {
-  redirect_to('admin/index.php');
+  redirect_to(url_for('admin/index.php'));
 }
 $location = Location::find_by_id($id);
 
@@ -35,7 +35,7 @@ $location = Location::find_by_id($id);
 <section>
   <div class="login-form">
     <h2 class="login-sign">Upload Images</h2>
-    <form action="image_upload.php?id=<?php echo $location->id?>" method="post" enctype="multipart/form-data">
+    <form action="<?php echo url_for('/image_upload.php?id' . h(u($location->id))) ?>" method="post" enctype="multipart/form-data">
 
       <label for="upload-name">Select the image to upload:<br>
         <input type="file" id="upload-name" name="photo[photo_name]" value="<?php echo h($photo->photo_name) ?>"><br>
@@ -53,13 +53,13 @@ $location = Location::find_by_id($id);
 
         <label for="upload-location">Location ID:<br>
           <select name="photo[location_id]" id="upload-location">
-            <option value="<?php echo $location->id; ?>" selected></option>
+            <option value="<?php echo h($location->id); ?>" selected></option>
           </select>
         </label>
       </div>
 
       <input type="submit" value="Upload Image" name="upload" class="button">
-      <a href="<?php echo url_for('/admin/locations.php'); ?>" class="button">Skip</a>
+      <a href="<?php echo url_for('/admin/locations.php'); ?>" class="remove-button">Skip</a>
 
     </form>
   </div>

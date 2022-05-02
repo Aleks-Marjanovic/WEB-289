@@ -4,7 +4,7 @@
 
 $id = $_GET['id'] ?? '1';
 if(!$id) {
-  redirect_to('index.php');
+  redirect_to(url_for('index.php'));
 }
 $location = Location::find_by_id($id);
 
@@ -16,13 +16,13 @@ $location = Location::find_by_id($id);
 <article class="location-content">
 
   <section class="location-info">
-    <img src="images/<?php echo $location->display_photo($location->id) ?>" height="500" width="500" alt="<?php echo $location->display_alt_text($location->id) ?>">
+    <img src="<?php echo url_for('images/' . h(u($location->display_photo($location->id)))); ?>" height="500" width="500" alt="<?php echo h($location->display_alt_text($location->id)); ?>">
     <h2><?php echo h($location->location_name); ?></h2>
     <address><?php echo h($location->street_address); ?><br>
             <?php echo h($location->city); ?>, NC<br>
             <?php echo h($location->zip_code); ?></address>
     <p>Phone Number: <?php echo h($location->phone_number); ?></p>
-    <p>Detailed Description: <?php echo h($location->detailed_description); ?></p>
+    <p>Detailed Description:<br> <?php echo h($location->detailed_description); ?></p>
   </section>
 
   <h3>Gallery</h3>
@@ -33,7 +33,7 @@ $location = Location::find_by_id($id);
 
     foreach($photos as $photo) {
       if($photo->location_id == $location->id) { ?>
-        <img src="images/<?php echo $photo->photo_name; ?>" height="300" width="400" alt="<?php echo $photo->alt_text; ?>">
+        <img src="<?php echo url_for('images/' . h(u($photo->photo_name))); ?>" height="300" width="400" alt="<?php echo h($photo->alt_text); ?>">
       <?php }
     }
 
@@ -48,9 +48,9 @@ $location = Location::find_by_id($id);
     foreach($reviews as $review) {
       if($review->location_id == $location->id) { ?>
       <div class="review">
-        <p>User: <?php echo $review->display_user($review->user_id) ?></p>
+        <p>User: <?php echo h($review->display_user($review->user_id)); ?></p>
         <p>Review: <br><?php echo h($review->review_text); ?></p>
-        <p>Rating: <?php echo $review->display_rating($location->id); ?></p>
+        <p>Rating: <?php echo h($review->display_rating($location->id)); ?></p>
       </div>
       <?php }
     }

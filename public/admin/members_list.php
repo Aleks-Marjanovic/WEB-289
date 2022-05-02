@@ -29,9 +29,9 @@
   <?php
   foreach($members as $member) { ?>
     <tr>
-      <td><?php echo $member->username; ?></td>
-      <td><?php echo $member->email; ?></td>
-      <td><?php echo $member->display_user_level($member->user_level_id)?></td>
+      <td><?php echo h($member->username); ?></td>
+      <td><?php echo h($member->email); ?></td>
+      <td><?php echo h($member->display_user_level($member->user_level_id)); ?></td>
       <td><a href="<?php echo url_for('/admin/remove_member.php?id=' . h(u($member->id))); ?>" class="remove-button">Remove</a></td>
       <td><a href="<?php echo url_for('/admin/promote.php?id=' . h(u($member->id))); ?>" class="button">Promote</a></td>
     </tr>

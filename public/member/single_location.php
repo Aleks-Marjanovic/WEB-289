@@ -20,18 +20,19 @@ $location = Location::find_by_id($id);
 <article class="location-content">
 
   <section class="location-info">
-    <img src="../images/<?php echo $location->display_photo($location->id) ?>" height="500" width="500" alt="<?php echo $location->display_alt_text($location->id) ?>">
+    <img src="<?php echo url_for('images/' . h(u($location->display_photo($location->id)))); ?>" height="500" width="500" alt="<?php echo h($location->display_alt_text($location->id)); ?>">
     <h2><?php echo h($location->location_name); ?></h2>
     
     <address><?php echo h($location->street_address); ?><br>
             <?php echo h($location->city); ?>, NC<br>
-            <?php echo h($location->zip_code); ?></address>
+            <?php echo h($location->zip_code); ?>
+    </address>
     <p>Phone Number: <?php echo h($location->phone_number); ?></p>
     <p>Detailed Description:<br> <?php echo h($location->detailed_description); ?></p>
   </section>
 
   <h3>Gallery</h3>
-  <a href="<?php echo url_for('/member/image_upload.php?id=' . $id); ?>" class="button">Add Images to Gallery</a>
+  <a href="<?php echo url_for('/member/image_upload.php?id=' . h(u($id))); ?>" class="button">Add Images to Gallery</a>
   <section class="gallery">
     <?php
 
@@ -39,7 +40,7 @@ $location = Location::find_by_id($id);
 
     foreach($photos as $photo) {
       if($photo->location_id == $location->id) { ?>
-        <img src="../images/<?php echo $photo->photo_name; ?>" height="300" width="400" alt="<?php echo $photo->alt_text; ?>">
+        <img src="<?php echo url_for('images/' . h(u($photo->photo_name))); ?>" height="300" width="400" alt="<?php echo h($photo->alt_text); ?>">
       <?php }
     }
 
@@ -47,16 +48,16 @@ $location = Location::find_by_id($id);
   </section>
 
   <h3>Reviews</h3>
-  <section class="location-info">
+  <section class="review-info">
     <?php
 
     $reviews = Review::find_all();
     foreach($reviews as $review) {
       if($review->location_id == $location->id) { ?>
         <div class="review">
-          <p>User: <?php echo $review->display_user($review->user_id) ?></p>
+          <p>User: <?php echo h($review->display_user($review->user_id)); ?></p>
           <p>Review: <br> <?php echo h($review->review_text); ?></p>
-          <p>Rating: <?php echo $review->display_rating($location->id); ?></p>
+          <p>Rating: <?php echo h($review->display_rating($location->id)); ?></p>
         </div>
       <?php }
     }
@@ -100,9 +101,9 @@ $location = Location::find_by_id($id);
   
             $ratings = Rating::find_all();
             foreach($ratings as $rating) { ?>
-              <option value="<?php echo $rating->id; ?>"
+              <option value="<?php echo h($rating->id); ?>"
                             <?php if($review->rating_id == $rating->id) {echo 'selected';} ?>>
-              <?php echo $rating->rating; ?>
+              <?php echo h($rating->rating); ?>
               </option>
             <?php }
           ?>
@@ -112,7 +113,7 @@ $location = Location::find_by_id($id);
       <div class="hide">
         <label for="review-location">Location ID:
           <select name="review[location_id]" id="review-location">
-            <option value="<?php echo $location->id; ?>" selected></option>
+            <option value="<?php echo h($location->id); ?>" selected></option>
           </select><br>
         </label>
 

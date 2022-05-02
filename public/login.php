@@ -44,14 +44,14 @@ if(is_post_request()) {
 <section>
   <div class="login-form">
     <h2 class="login-sign">Log In</h2>
-    <form action="login.php" method="post">
+    <form action="<?php echo url_for('login.php') ?>" method="post">
       
     <label for="email">Email:<br>
-        <input type="text" id="email" name="email" value="<?php echo h($email); ?>" class="input-field"><br>
+        <input type="text" id="email" name="email" value="<?php echo h($email); ?>" class="input-field" required><br>
       </label>
       
       <label for="password">Password:<br>
-        <input type="password" id="password" name="password" value="" class="input-field"><br>
+        <input type="password" id="password" name="password" value="" class="input-field" required><br>
       </label>
       <input type="submit" name="submit" value="Log In" class="button">
     </form>

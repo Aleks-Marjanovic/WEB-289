@@ -9,7 +9,7 @@
         if($result === true) {
           $new_id = $location->id;
           $session->message('The location was created successfully.');
-          redirect_to(url_for('/admin/image_upload.php?id=' . $new_id));
+          redirect_to(url_for('/admin/image_upload.php?id=' . h(u($new_id))));
         } else {
 
         }
@@ -64,9 +64,9 @@
 
             $photoshoots = Photoshoot::find_all();
             foreach($photoshoots as $photoshoot) { ?>
-              <option value="<?php echo $photoshoot->id; ?>"
+              <option value="<?php echo h($photoshoot->id); ?>"
                             <?php if($location->photoshoot_id == $photoshoot->id) {echo 'selected';} ?>>
-              <?php echo $photoshoot->photoshoot_type; ?>
+              <?php echo h($photoshoot->photoshoot_type); ?>
               </option>
             <?php }
           ?>
