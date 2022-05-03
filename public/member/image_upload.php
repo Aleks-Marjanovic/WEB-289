@@ -36,7 +36,7 @@ $location = Location::find_by_id($id);
 <section>
   <div class="login-form">
     <h2 class="login-sign">Upload Images</h2>
-    <form action="<?php echo url_for('/image_upload.php?id' . h(u($location->id))) ?>" method="post" enctype="multipart/form-data">
+    <form action="<?php echo url_for('member/image_upload.php?id' . h(u($location->id))); ?>" method="post" enctype="multipart/form-data">
 
       <label for="upload-name">Select the image to upload:<br>
         <input type="file" id="upload-name" name="photo[photo_name]" value="<?php echo h($photo->photo_name); ?>"><br>

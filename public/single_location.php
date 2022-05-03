@@ -16,7 +16,7 @@ $location = Location::find_by_id($id);
 <article class="location-content">
 
   <section class="location-info">
-    <img src="<?php echo url_for('images/' . h(u($location->display_photo($location->id)))); ?>" height="500" width="500" alt="<?php echo h($location->display_alt_text($location->id)); ?>">
+    <img src="<?php echo url_for('images/' . h(u($location->display_photo($location->id)))); ?>" height="750" width="750" alt="<?php echo h($location->display_alt_text($location->id)); ?>">
     <h3><?php echo h($location->location_name); ?></h3>
     <address><?php echo h($location->street_address); ?><br>
             <?php echo h($location->city); ?>, NC<br>

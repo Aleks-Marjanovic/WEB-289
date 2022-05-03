@@ -51,6 +51,7 @@ include(SHARED_PATH . '/public_header.php');
       data-callback='onSubmit'
       data-action='submit'>
     </form>
+  </div>
 </section>
 
 <?php include(SHARED_PATH . '/public_footer.php'); ?>
