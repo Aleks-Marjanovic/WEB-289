@@ -34,6 +34,7 @@
 
     <form action="<?php echo url_for('/admin/promote.php?id=' . h(u($id))); ?>" method="post">
       <input type="submit" value="Promote Member" class="button">
+      <a href="<?php echo url_for('/admin/members_list.php'); ?>" class="button">Cancel</a>
     </form>
   </div>
 </section>
