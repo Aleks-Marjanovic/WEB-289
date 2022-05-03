@@ -8,7 +8,8 @@
     <meta name="author" content="Aleks Marjanovic">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" media="all" href="<?php echo url_for('/css/styles.css'); ?>"/>
-    <script src="../js/modal.js" async></script>
+    <script src="https://www.google.com/recaptcha/api.js" defer></script>
+    <script src="<?php echo url_for('/js/modal.js'); ?>" defer></script>
   </head>
 
   <body>

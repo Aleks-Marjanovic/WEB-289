@@ -29,7 +29,7 @@ include(SHARED_PATH . '/public_header.php');
 <section>
   <div class="login-form">
     <h2 class="login-sign">Sign Up</h2>
-    <form action="<?php echo url_for('signup.php'); ?>" method="post">
+    <form action="<?php echo url_for('signup.php'); ?>" method="post" id="signup-form">
 
       <label for="username">Username:<br>
         <input type="text" id="username" name="admin[username]" value="<?php echo h($admin->username); ?>" required class="input-field"/><br>
@@ -47,7 +47,9 @@ include(SHARED_PATH . '/public_header.php');
         <input type="password" id="confirm-password" name="admin[confirm_password]" value="" required class="input-field"/><br>
       </label>
 
-      <input type="submit" value="Sign Up" class="button">
+      <input type="submit" value="Sign Up" class="button g-recaptcha" data-sitekey="6Lfq4rsfAAAAAJ9vhi2fSeABHybc0g1gEJ5wgfiQ"
+      data-callback='onSubmit'
+      data-action='submit'>
     </form>
 </section>
 

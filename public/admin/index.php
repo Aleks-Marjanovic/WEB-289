@@ -1,5 +1,5 @@
 <?php require_once('../../private/initialize.php'); 
-      require_login();
+      require_admin_login();
 
 ?>
 
@@ -31,7 +31,7 @@
       <div class="card">
         <img src="<?php echo url_for('/images/max_patch3.jpg'); ?>" alt="Rolling mountains at a sunset with two people sitting on the grass." height="300" width="400">
         <div class="text-box">
-          <h2>Help us grow</h2>
+          <h2>Help Us Grow</h2>
           <p>Get engaged with this growing community and contribute to it with new content. Tell us what you think about the locations you have visited. Was the description accurate? Did you have troubles reaching the location?<br>
         Our main goal is to find that perfect magical location for everyone that is looking for one, and we are grateful to our community for helping us while we work to make this possible.</p>
         </div>

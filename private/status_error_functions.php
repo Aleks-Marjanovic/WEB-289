@@ -15,6 +15,20 @@ function require_login() {
 }
 
 /**
+ * Checks whether the user has the access to the page
+ *
+ * @return void
+ */
+function require_admin_login() {
+  global $session;
+  if(!$session->is_logged_in() && $session->user_level_id > 2) {
+    redirect_to(url_for('/login.php'));
+  } else {
+    // Do nothing, let the rest of the page proceed
+  }
+}
+
+/**
  * Displays errors in a preformatted way
  *
  * @param array $errors

@@ -4,6 +4,7 @@ class Session {
 
   public $admin_id;
   public $username;
+  public $user_level_id;
   private $last_login;
 
   public const MAX_LOGIN_AGE = 60*60*24; // 1 day
@@ -25,6 +26,7 @@ class Session {
       session_regenerate_id();
       $this->admin_id = $_SESSION['admin_id'] = $admin->id;
       $this->username = $_SESSION['username'] = $admin->username;
+      $this->user_level_id = $_SESSION['user_level_id'] = $admin->user_level_id;
       $this->last_login = $_SESSION['last_login'] = time();
     }
     return true;
@@ -36,7 +38,6 @@ class Session {
    * @return boolean
    */
   public function is_logged_in() {
-    // return isset($this->admin_id);
     return isset($this->admin_id) && $this->last_login_is_recent();
   }
 
@@ -48,9 +49,11 @@ class Session {
   public function logout() {
     unset($_SESSION['admin_id']);
     unset($_SESSION['username']);
+    unset($_SESSION['user_level_id']);
     unset($_SESSION['last_login']);
     unset($this->admin_id);
     unset($this->username);
+    unset($this->user_level_id);
     unset($this->last_login);
     return true;
   }
@@ -64,6 +67,7 @@ class Session {
     if(isset($_SESSION['admin_id'])) {
       $this->admin_id = $_SESSION['admin_id'];
       $this->username = $_SESSION['username'];
+      $this->user_level_id = $_SESSION['user_level_id'];
       $this->last_login = $_SESSION['last_login'];
     }
   }
