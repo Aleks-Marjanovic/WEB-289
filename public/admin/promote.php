@@ -7,6 +7,10 @@
       }
       $id = $_GET['id'];
       $admin = Admin::find_by_id($id);
+      if($admin->user_level_id == 1) {
+        $session->message('This member cannot be promoted since it is a SuperAdmin.');
+        redirect_to(url_for('/admin/members_list.php'));
+      }
       $admin->promote($id);
       if($admin == false) {
         redirect_to(url_for('/admin/index.php'));
