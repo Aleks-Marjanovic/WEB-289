@@ -21,7 +21,7 @@ $location = Location::find_by_id($id);
 
   <section class="location-info">
     <img src="<?php echo url_for('images/' . h(u($location->display_photo($location->id)))); ?>" height="500" width="500" alt="<?php echo h($location->display_alt_text($location->id)); ?>">
-    <h2><?php echo h($location->location_name); ?></h2>
+    <h3><?php echo h($location->location_name); ?></h3>
     
     <address><?php echo h($location->street_address); ?><br>
             <?php echo h($location->city); ?>, NC<br>
@@ -31,7 +31,7 @@ $location = Location::find_by_id($id);
     <p>Detailed Description:<br> <?php echo h($location->detailed_description); ?></p>
   </section>
 
-  <h3>Gallery</h3>
+  <h2>Gallery</h2>
   <a href="<?php echo url_for('/member/image_upload.php?id=' . h(u($id))); ?>" class="button">Add Images to Gallery</a>
   <section class="gallery">
     <?php
@@ -47,7 +47,7 @@ $location = Location::find_by_id($id);
     ?>
   </section>
 
-  <h3>Reviews</h3>
+  <h2>Reviews</h2>
   <section class="review-info">
     <?php
 
